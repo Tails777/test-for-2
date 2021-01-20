@@ -1,0 +1,33 @@
+
+
+SELECT distinct vgo1.NV 
+ FROM USEROBD.VGO vgo1 inner join USEROBD.VGR vgr1 on vgr1.NV = vgo1.NV AND vgr1.NPKLV = vgo1.NPKLV AND vgr1.NRS = vgo1.NRS AND vgr1.NPKLRV = vgo1.NPKLRV 
+ where vgo1.MSGID>'2020-12-25-13.37.33.000000' and vgr1.ip is null
+ and not exists 
+ (SELECT * 
+ FROM USEROBD.VGO vgo2 inner join USEROBD.VGR vgr2 on vgr2.NV = vgo2.NV AND vgr2.NPKLV = vgo2.NPKLV AND vgr2.NRS = vgo2.NRS AND vgr2.NPKLRV = vgo2.NPKLRV 
+ where vgr2.nv=vgr1.nv 
+ and vgo2.MSGID>vgo1.msgid and vgr2.ip is not null)
+
+
+
+
+SELECT distinct vgo1.NV 
+ FROM USEROBD.VGO vgo1 inner join USEROBD.VGR vgr1 on vgr1.NV = vgo1.NV AND vgr1.NPKLV = vgo1.NPKLV AND vgr1.NRS = vgo1.NRS AND vgr1.NPKLRV = vgo1.NPKLRV 
+ where vgo1.MSGID>'2020-12-29-10.37.33.000000' and vgr1.ip is null and vgo1.kso='150000'
+ and not exists 
+ (SELECT * 
+ FROM USEROBD.VGO vgo2 inner join USEROBD.VGR vgr2 on vgr2.NV = vgo2.NV AND vgr2.NPKLV = vgo2.NPKLV AND vgr2.NRS = vgo2.NRS AND vgr2.NPKLRV = vgo2.NPKLRV 
+ where vgr2.nv=vgr1.nv 
+ and vgo2.MSGID>vgo1.msgid and vgr2.ip is not null)
+
+
+
+
+SELECT  distinct NV, IP 
+ FROM USEROBD.VGR where NV in (select NV from USEROBD.VGO where KOP='P1010')
+
+
+SELECT *
+ FROM USEROBD.SP_VYCH t1 right join USEROBD.SP_VYCH_PASS t2 
+ on t1.K1GU=t2.k1gu and t1.K2GU=t2.K2GU 
